@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+
+  Voting introduction. <br/>
+
+  Perhaps you're looking at Sushi:<br>
+
+  [[ Basic vote among candidates. ]]
+
+  Describe: this is real data, collected as a survey of 5000 people on their sushi habits in Japan.
+  As we can see, Sea Urchin is the pretty clear winner here. This is a bit odd don't you think? Sea Urchin is a very
+  strong dish -- one might expect a more commonly liked fish like tuna would come out ahead.
+
+  Let's take a deeper look. We'll need a bit more data though.
+
+  [[ Basic vote spread by preference ]]
+
+  // Understanding preference
+
+  What if we let everyone rank the candidates by preference? I might prefer Shrimp the most, and find Tuna alright, but
+  decidedly hate Salmon, so I'll rank that last.
+
+  // allow users to add their own preference here for great good?
+
+  This is what the same vote looks like with voter's preferences shown.  Here we have each candidate along with the
+  number of people who placed the candidate at that position in their preference. Before we looked just at the 0 preference
+  slot, or "how many people placed this candidate first in their list?".
+
+  The results start to pick apart this puzzle. Tuna does tend to be well liked, with most people placing it in the top
+  half of their list. Sea Urchin on the other hand tells a very different story. It turns out to be quite the extremist.
+  A great deal of people placed Sea Urchin at the top of their list, but a great deal also placed it at the bottom! In
+  fact, even **more** people ranked Sea Urchin in last place than first.
+
+  And yet Sea Urchin won our first vote.
+
+  It turns out that this system of voting (the most widely used system in the world) is just about one of the worst. It's
+  technical name is Plurality Voting and it [doesn't] [have] a [great] [reputation]. It allows extremist candidates
+  who even a majority of people may dislike to win elections.
+
+  Voting systems aren't fixed in stone. What happens if we tweak it a bit?
+
+  Right now, if you vote for a losing candidate, your vote essentially doesn't count. Instead let's count all of these
+  *lost* votes towards the voter's second choice.  [[better description here]]
+
+  With three candidates, this might look something like this:
+  [[ Three candidate IRV demo ]]
+
+  If we have more than 3 candidates, we'll do the same thing: eliminate the worst candidate and redistribute those
+  voters to the rest.
+  [[ Full IRV demo ]]
+
+  This look a lot better! One more thing. Candidates running in a plurality vote system are often plagued by "splitting
+  the vote". If two candidates from the same party (or that are simply quite similar) run in the same race, they end
+  up getting half of the vote, and making things worse for the both of them. This happens all the time. It's the reason
+  Bloomberg didn't run for president, and one reason political parties strongly tend to elect a single candidate, even
+  when the majority of the party disagrees with their views.
+
+  Let's look at how each system handles this scenario in the extreme case. Click on a candidate to "clone" them, this adds a second
+  with the exact same views to the race.
+
+  [[ Clone demo | Plurality vs. IRV. Fixed candidates with cloning ]]
+
+  It makes you wonder how we could ever trust Plurality at all.
+
+
+</body>
+</html>

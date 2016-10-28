@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sushi</title>
+
+  <!-- Disable tap highlight on IE -->
+  <meta name="msapplication-tap-highlight" content="no">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+  <!-- Materialize -->
+  <!-- TODO: Download and virus scan these, lest we allow arbitrary code injection. -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
+
+  <!-- Web Application Manifest -->
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="styles/main.css"/>
+  <link rel="stylesheet" href="styles/style.css"/>
+
+  <!-- Add to homescreen for Chrome on Android -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="application-name" content="Web Starter Kit">
+  <link rel="icon" sizes="192x192" href="images/touch/chrome-touch-icon-192x192.png">
+
+  <!-- Add to homescreen for Safari on iOS -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="Web Starter Kit">
+  <link rel="apple-touch-icon" href="images/touch/apple-touch-icon.png">
+
+  <!-- Tile icon for Win8 (144x144 + tile color) -->
+  <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
+  <meta name="msapplication-TileColor" content="#2F3BA2">
+
+  <!-- Color the status bar on mobile devices -->
+  <meta name="theme-color" content="#2F3BA2">
+
+
+  <!-- SEO: If your mobile URL is different from the desktop URL, add a canonical link to the desktop page https://developers.google.com/webmasters/smartphone-sites/feature-phones -->
+  <!--
+  <link rel="canonical" href="http://www.example.com/">
+  -->
+
+</head>
+<body id="markdowntext">
+
+
+
+There's something very wrong with the political system in America. It's understandable to be a bit tired at this point.
+Let's take a step back.
+
+What if sushi ran for president, instead?
+
+Luckily we don't have to dream &mdash; we have the data, collected as a survey of 5,000 people on their sushi habits in Japan:
+
+<div id="basic_vote"></div>
+
+And the winner is! Sea Urchin?
+
+This is a bit odd don't you think? Sea Urchin is a strong dish -- one might expect
+a common fish like tuna to come out ahead.
+
+Let's take a deeper look. We'll need a bit more data though. One vote per person just isn't enough.
+
+## Understanding preference
+
+What if we let everyone rank the candidates by preference? For instance, my sushi preference places Salmon and Shrimp
+at the top and Cucumber and Egg at the bottom.
+
+This is what the preferences of all 5000 voters looks like. Votes towards the left means voters placed that
+candidate high on their list, votes on the right are from voters who placed the candidate at the bottom.
+
+<div id="candidate_breakdown"></div>
+
+The results start to pick apart this puzzle. Tuna does tend to be well liked, with most people placing it in the top
+half of their list. Sea Urchin is a very different story. It turns out to be quite the extremist.
+A great deal of people placed Sea Urchin at the top of their list, but a great deal also placed it at the bottom! __In
+fact, even more people ranked Sea Urchin in last place than first.__
+
+And yet Sea Urchin won our first vote.
+
+It turns out that this system of voting (the most widely used system in the world) is just about one of the worst. It's
+technical name is Plurality Voting and it [doesn't] [have] a [great] [reputation]. It allows extremist candidates
+who even a majority of people may dislike to win elections.
+
+Voting systems aren't fixed in stone. What happens if we tweak it a bit?
+
+Right now, if you vote for a losing candidate, your vote essentially doesn't count. Instead, let's count all of
+these lost votes towards the voter's second choice.
+
+With three candidates, this might look something like this:
+
+<div id="irv_three"></div>
+
+If we have more than 3 candidates, we'll do the same thing: eliminate the worst candidate and redistribute those
+voters to the rest.
+
+<div id="irv_full"></div>
+
+This look a lot better! This is called [Instant Runoff Voting](https://en.wikipedia.org/wiki/Instant-runoff_voting).
+If you place your primary vote for a candidate that doesn't win, your second and third votes get counted in the "run off"
+elections after your primary candidate is eliminated.
+
+One more thing. Candidates running in a plurality vote system are often plagued by "splitting
+the vote". If two very similar candidates (perhaps from the same party) run in the same race, they each get half of the vote,
+and make things worse for the both of them. This happens all the time. It's the
+reason
+Bloomberg didn't run for president, and one reason political parties strongly tend to elect a single candidate,
+even
+when the majority of the party disagrees with their views.
+
+Let's look at how each system handles this scenario. Click on a candidate to "clone"
+them. This adds a second candidate with the same view to the race (voters place this new candidate alongside the first in
+their ranking). We'll start with our familiar plurality system:
+
+See if you can get a winning candidate to lose, just by adding new candidates to the race!
+
+<div id="basic_vote_cloning"></div>
+
+Now how about with Instant Runoff Voting?
+
+<div id="irv_full_cloning"></div>
+
+It makes you wonder how we could ever trust Plurality at all.
+
+
+/// thoughts
+what are clones?
+make the stages clearer between irv non-started and started irv
+make it clear where human interaction is happening in IRV.
+thinks that putting too many cloned choices at the top of the ballot might throw away those votes.
+be clear: IRV does not allow throwing away your vote.
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3fc/10.1.0/d3fc.bundle.js"></script>
+<script data-main="scripts/main" src="scripts/require.js"></script>
+
+</body>
+</html>
