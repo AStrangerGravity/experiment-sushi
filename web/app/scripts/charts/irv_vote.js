@@ -198,6 +198,8 @@ define(["d3", "data", "linq", "candidate_info", "chai", "colors"],
         transition.attr("fill", function (d) {
             return colors.blue_teal;
         });
+      } else {
+        last_bins;
       }
 
       return data_bins;

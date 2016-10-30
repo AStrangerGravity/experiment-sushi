@@ -227,6 +227,10 @@ html, body {
   display: inline;
 }
 
+#voter_preference .y.axis .domain {
+  display: inline;
+}
+
 .bar {
 }
 

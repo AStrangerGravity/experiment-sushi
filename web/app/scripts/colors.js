@@ -1,4 +1,4 @@
-define([], () => {
+define(["d3"], (d3) => {
   var colors = {
     aqua: '#7fdbff',
     blue: '#0074d9',
@@ -17,9 +17,11 @@ define([], () => {
     white: '#ffffff',
     black: '#111111',
     silver: '#dddddd',
-    blue_teal: 'rgb(48,173,205)'
+    blue_teal: 'rgb(48,173,205)',
+    transparent: 'rgba(0,0,0,0)',
+    candidates_categorical: d3.scale.category10()
   };
-  
+
   return colors;
 });
 
