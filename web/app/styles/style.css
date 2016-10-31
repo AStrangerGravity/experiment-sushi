@@ -1,6 +1,6 @@
 body {
   text-align:center;
-  color:#000;
+  color:#333;
   font-family:georgia, serif;
   font-size:120%;
   line-height:1.6;
@@ -9,7 +9,6 @@ body {
   background:rgb(253, 253, 253);
   margin:auto;
   max-width:50em;
-  color:rgb(10, 10, 10);
 }
 
 a {outline:none !important; font-weight:bold; text-decoration:none;}
@@ -64,6 +63,7 @@ p {
   text-align:left;
   font-size:100%;
   margin:1em 0 0;
+  padding: 0 6em 0 6em;
 }
 
 p.lead {

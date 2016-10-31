@@ -179,8 +179,17 @@ define(["d3", "data", "linq", "candidate_info", "chai", "colors"],
 
       var transition = all_voters
         .transition()
+        .duration(500)
+        .attr("fill", (d, i) => {
+          if (last_bins === undefined) { return colors.gray; }
+          var bin = data_bins.find(b => b.voters.includes(i));
+          var old_bin = last_bins.find(b => b.voters.includes(i));
+          return bin.candidate === old_bin.candidate ? colors.blue_teal : colors.gray;
+        })
+
+        .transition()
         .duration(1000)
-        //.delay(function () { return Math.random() * 600; })
+        .delay(function () { return 1250 + Math.random() * 600; })
         .attr("x", (d, i) => {
           var bin = data_bins.find(b => b.candidate === d);
           var index_in_bin = bin.voters.indexOf(i);
@@ -196,10 +205,9 @@ define(["d3", "data", "linq", "candidate_info", "chai", "colors"],
 
       if (needs_color_change) {
         transition.attr("fill", function (d) {
-            return colors.blue_teal;
+          return colors.blue_teal;
         });
       } else {
-        last_bins;
       }
 
       return data_bins;
@@ -244,7 +252,7 @@ define(["d3", "data", "linq", "candidate_info", "chai", "colors"],
         // Re-render the visualization
         bins = render(dataset, first_candidates, current_candidates, current_candidate_names, bins, clicked_on_voter, needs_color_change);
 
-        needs_color_change = !needs_color_change;
+        //needs_color_change = !needs_color_change;
       }
 
       function reset_all() {

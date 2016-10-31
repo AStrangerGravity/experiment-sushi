@@ -15,13 +15,14 @@ define(["d3", "data", "linq", "candidate_info", "chai", "colors", "d3_transform"
       // Set the data and update when we get it
       data.then(datas => {
         all_data = datas.cropped_500;
+        all_data = all_data.map(d => d.filter(e => candidate_info.basic.ids.includes(e)));
         setup_chart();
       });
 
       function setup_chart() {
         var full_width = 700;
         var full_height = 400;
-        var margin = {top: 20, right: 150, bottom: 100, left: 50};
+        var margin = {top: 50, right: 150, bottom: 50, left: 50};
         var width = full_width - margin.left - margin.right;
         var height = full_height - margin.top - margin.bottom;
         var graph_svg = main_div.append("svg")
@@ -31,20 +32,15 @@ define(["d3", "data", "linq", "candidate_info", "chai", "colors", "d3_transform"
           .append("g")
           .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-        /*var y_axis = graph.append("g")
-          .attr("class", "y axis")
-          .call(d3.svg.axis()
-            .scale(d3.scale.linear().range([0, height]))
-            .orient("left")
-            .ticks(0));*/
-
         var legend = graph.append("g");
 
         var block_spacing_vertical = height / all_data[0].length;
         var block_spacing_horizontal = block_spacing_vertical * 1.5;
-        var block_padding = 15;
+        var block_padding = 23;
         var block_size = Math.min(block_spacing_horizontal, block_spacing_vertical) - block_padding;
         var num_columns = width / block_spacing_horizontal;
+
+        // Setup data
         var shown_data = all_data.slice(0, num_columns);
 
         // Main function called every time candidate data changes
@@ -71,7 +67,8 @@ define(["d3", "data", "linq", "candidate_info", "chai", "colors", "d3_transform"
           // Add border on similar elements on hover
           function add_border_for_candidate(candidate) {
             graph.selectAll("rect[candidate='" + candidate + "']")
-              .attr("stroke", colors.black);
+              .attr("stroke", colors.black)
+              .attr("stroke-width", 3);
           }
 
           function remove_border_for_candidate(candidate) {
@@ -131,10 +128,11 @@ define(["d3", "data", "linq", "candidate_info", "chai", "colors", "d3_transform"
           var y_labels = graph.append("g");
           var labels = y_labels.selectAll("text").data(d3.range(shown_data[0].length));
           labels.enter().append("text")
-            .attr("y", (_, i) => i * block_spacing_vertical + 10)
+            .attr("y", (_, i) => i * block_spacing_vertical + block_size / 2)
             .attr("x", -30)
             .attr("fill", colors.gray)
             .attr("text-anchor", "end")
+            .attr("dominant-baseline", "middle")
             .text(d => d + 1);
 
           graph.append("text")

@@ -165,6 +165,16 @@ define(["d3", "data", "linq", "candidate_info", "chai", "colors"],
             .attr("y", d => group_y(d.count));
 
 
+          // Draw number labels for each bar
+          var labels = graph.selectAll(".bar-label").data(d3.range(breakdown.breakdown.length));
+          labels.enter().append("text")
+            .attr("class", "bar-label")
+            .attr("text-anchor", "middle")
+            .attr("fill", colors.white)
+            .attr("x", d => group_x(d) + group_x.rangeBand() / 2)
+            .attr("y", height - 20)
+            .text(d => d + 1);
+
         }
 
         function small_breakdowns() {
@@ -252,7 +262,7 @@ define(["d3", "data", "linq", "candidate_info", "chai", "colors"],
         }
 
 
-        large_breakdown(breakdowns[0]);
+        large_breakdown(breakdowns[candidate_names.indexOf("sea urchin")]);
         small_breakdowns();
       });
 
